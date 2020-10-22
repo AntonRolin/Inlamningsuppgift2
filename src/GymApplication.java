@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,7 +11,7 @@ import java.util.Scanner;
  */
 public class GymApplication {
 
-    public void userInputOutput(List<Person> customers) {
+    public void userInputOutput(List<Person> customers) throws IOException{
         Scanner scan = new Scanner(System.in);
 
         System.out.println("Skriv in namn eller personnummer: ");

@@ -14,9 +14,7 @@ public class FileReader {
     public List<Person> readFromFileAddToList(String path){
         List<Person> customers = new ArrayList<>();
 
-        try {
-            Scanner fileInput = new Scanner(new File(path));
-
+        try(Scanner fileInput = new Scanner(new File(path))) {
             while (fileInput.hasNextLine()) {
                 String tempLine;
                 tempLine = fileInput.nextLine();
@@ -43,16 +41,15 @@ public class FileReader {
         return person.getMemberRegDate().isAfter(LocalDate.now().minusYears(1));
     }
 
-    public void printToFile(Person person){
+    public void printToFile(Person person)throws IOException{
         File file = new File("src/membervisits.txt");
-        try {
+
             if (!file.exists()) {
                 file.createNewFile();
             }
 
-            PrintWriter writer = new PrintWriter(new FileWriter(file, true));
+        try (PrintWriter writer = new PrintWriter(new FileWriter(file, true))){
             writer.write(person.getIdNumber() + ";" + person.getName() + ";" + LocalDate.now() + "\n");
-            writer.close();
         }catch(IOException e){
             System.out.println("ERROR: COULD NOT LOG VISIT!");
         }
